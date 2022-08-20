@@ -1,8 +1,13 @@
 using System.Text.Json.Serialization;
+using AutoMapper;
+using Business.Interfaces;
+using Business.Mappings;
+using Business.Services;
 using DataAccess;
 using DataAccess.Interfaces;
-using DataAccess.Models;
+using DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +22,11 @@ builder.Services.AddDbContext<ShoeShopContext>(options => options.UseSqlServer(b
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddSingleton<IDbMapper,DbMapper>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+
 
 var app = builder.Build();
 

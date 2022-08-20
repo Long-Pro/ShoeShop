@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccess.Models
+namespace DataAccess.Entities
 {
     public partial class Brand
     {
@@ -12,6 +12,7 @@ namespace DataAccess.Models
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+        public string Image { get; set; } = null!;
 
         public virtual ICollection<Shoe> Shoes { get; set; }
     }

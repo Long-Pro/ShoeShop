@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccess.Models
+namespace DataAccess.Entities
 {
     public partial class Color
     {
@@ -12,7 +12,7 @@ namespace DataAccess.Models
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public string? Hex { get; set; }
+        public string Hex { get; set; } = null!;
 
         public virtual ICollection<ShoeColor> ShoeColors { get; set; }
     }

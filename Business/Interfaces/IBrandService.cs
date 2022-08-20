@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.DTOs;
 
-namespace Business.DTOs
+namespace Business.Interfaces
 {
-    internal class BrandDTO
+    public interface IBrandService
     {
+        BrandDTO GetBrandById(int id);
     }
 }

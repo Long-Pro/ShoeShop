@@ -1,5 +1,5 @@
 ﻿using DataAccess.Interfaces;
-using DataAccess.Models;
+using DataAccess.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -15,7 +15,7 @@ namespace WebAPI.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        [HttpGet("GetAll")]
+        /*[HttpGet("GetAll")]
         public IEnumerable<Brand> GetAll()
         {
             return unitOfWork.Brand.GetAll();
@@ -43,6 +43,6 @@ namespace WebAPI.Controllers
         public IEnumerable<Shoe> GetAllShoeWithJoin()
         {
             return unitOfWork.Shoe.GetAllWithJoin();
-        }
+        }*/
     }
 }

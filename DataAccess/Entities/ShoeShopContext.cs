@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DataAccess.Models
+namespace DataAccess.Entities
 {
     public partial class ShoeShopContext : DbContext
     {
@@ -48,15 +48,14 @@ namespace DataAccess.Models
         {
             modelBuilder.Entity<Account>(entity =>
             {
-                entity.HasKey(e => e.Account1)
-                    .HasName("PK__Account__B0C3AC4778BC5016");
-
                 entity.ToTable("Account");
 
-                entity.Property(e => e.Account1)
+                entity.HasIndex(e => e.AccountValue, "UQ__Account__85F1D1F85DA3EE16")
+                    .IsUnique();
+
+                entity.Property(e => e.AccountValue)
                     .HasMaxLength(20)
-                    .IsUnicode(false)
-                    .HasColumnName("Account");
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Password)
                     .HasMaxLength(100)
@@ -65,7 +64,8 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Accounts)
                     .HasForeignKey(d => d.RoleId)
-                    .HasConstraintName("FK__Account__RoleId__398D8EEE");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Account__RoleId__3A81B327");
             });
 
             modelBuilder.Entity<Bill>(entity =>
@@ -79,23 +79,25 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Bills)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__Bill__CustomerId__5070F446");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Bill__CustomerId__534D60F1");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Bills)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Bill__EmployeeId__5165187F");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Bill__EmployeeId__5441852A");
 
                 entity.HasOne(d => d.Promotion)
                     .WithMany(p => p.Bills)
                     .HasForeignKey(d => d.PromotionId)
-                    .HasConstraintName("FK__Bill__PromotionI__52593CB8");
+                    .HasConstraintName("FK__Bill__PromotionI__5535A963");
             });
 
             modelBuilder.Entity<BillDetail>(entity =>
             {
                 entity.HasKey(e => new { e.BillId, e.ShoeStoreId })
-                    .HasName("PK__BillDeta__DBEFEB63608C3DEA");
+                    .HasName("PK__BillDeta__DBEFEB6364E63EE9");
 
                 entity.ToTable("BillDetail");
 
@@ -103,18 +105,20 @@ namespace DataAccess.Models
                     .WithMany(p => p.BillDetails)
                     .HasForeignKey(d => d.BillId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BillDetai__BillI__5629CD9C");
+                    .HasConstraintName("FK__BillDetai__BillI__59063A47");
 
                 entity.HasOne(d => d.ShoeStore)
                     .WithMany(p => p.BillDetails)
                     .HasForeignKey(d => d.ShoeStoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__BillDetai__ShoeS__571DF1D5");
+                    .HasConstraintName("FK__BillDetai__ShoeS__59FA5E80");
             });
 
             modelBuilder.Entity<Brand>(entity =>
             {
                 entity.ToTable("Brand");
+
+                entity.Property(e => e.Image).HasMaxLength(200);
 
                 entity.Property(e => e.Name).HasMaxLength(50);
             });
@@ -122,7 +126,7 @@ namespace DataAccess.Models
             modelBuilder.Entity<Cart>(entity =>
             {
                 entity.HasKey(e => new { e.CustomerId, e.ShoeStoreId })
-                    .HasName("PK__Cart__6EB373D11F258CB0");
+                    .HasName("PK__Cart__6EB373D1D7CB4119");
 
                 entity.ToTable("Cart");
 
@@ -130,13 +134,13 @@ namespace DataAccess.Models
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cart__CustomerId__4CA06362");
+                    .HasConstraintName("FK__Cart__CustomerId__4F7CD00D");
 
                 entity.HasOne(d => d.ShoeStore)
                     .WithMany(p => p.Carts)
                     .HasForeignKey(d => d.ShoeStoreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cart__ShoeStoreI__4D94879B");
+                    .HasConstraintName("FK__Cart__ShoeStoreI__5070F446");
             });
 
             modelBuilder.Entity<Color>(entity =>
@@ -154,15 +158,11 @@ namespace DataAccess.Models
             {
                 entity.ToTable("Customer");
 
-                entity.Property(e => e.Account)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.Address)
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Avatar).HasMaxLength(100);
+                entity.Property(e => e.Avatar).HasMaxLength(200);
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
@@ -178,23 +178,25 @@ namespace DataAccess.Models
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.AccountNavigation)
+                entity.HasOne(d => d.Account)
                     .WithMany(p => p.Customers)
-                    .HasForeignKey(d => d.Account)
-                    .HasConstraintName("FK__Customer__Accoun__3C69FB99");
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Customer__Accoun__3D5E1FD2");
             });
 
             modelBuilder.Entity<Employee>(entity =>
             {
                 entity.ToTable("Employee");
 
-                entity.Property(e => e.Account)
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+                entity.HasIndex(e => e.IdentityCard, "UQ__Employee__DA5B2F6DF557C49F")
+                    .IsUnique();
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Avatar).HasMaxLength(100);
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
@@ -206,16 +208,21 @@ namespace DataAccess.Models
                     .HasMaxLength(10)
                     .IsUnicode(false);
 
+                entity.Property(e => e.IdentityCard)
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Name).HasMaxLength(50);
 
                 entity.Property(e => e.Phone)
                     .HasMaxLength(20)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.AccountNavigation)
+                entity.HasOne(d => d.Account)
                     .WithMany(p => p.Employees)
-                    .HasForeignKey(d => d.Account)
-                    .HasConstraintName("FK__Employee__Accoun__46E78A0C");
+                    .HasForeignKey(d => d.AccountId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Employee__Accoun__49C3F6B7");
             });
 
             modelBuilder.Entity<Exchange>(entity =>
@@ -229,22 +236,26 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Bill)
                     .WithMany(p => p.Exchanges)
                     .HasForeignKey(d => d.BillId)
-                    .HasConstraintName("FK__Exchange__BillId__5AEE82B9");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Exchange__BillId__5DCAEF64");
 
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.Exchanges)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__Exchange__Employ__59FA5E80");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Exchange__Employ__5CD6CB2B");
 
                 entity.HasOne(d => d.NewShoeStore)
                     .WithMany(p => p.ExchangeNewShoeStores)
                     .HasForeignKey(d => d.NewShoeStoreId)
-                    .HasConstraintName("FK__Exchange__NewSho__5CD6CB2B");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Exchange__NewSho__5FB337D6");
 
                 entity.HasOne(d => d.OldShoeStore)
                     .WithMany(p => p.ExchangeOldShoeStores)
                     .HasForeignKey(d => d.OldShoeStoreId)
-                    .HasConstraintName("FK__Exchange__OldSho__5BE2A6F2");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Exchange__OldSho__5EBF139D");
             });
 
             modelBuilder.Entity<ImportNote>(entity =>
@@ -256,12 +267,14 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Employee)
                     .WithMany(p => p.ImportNotes)
                     .HasForeignKey(d => d.EmployeeId)
-                    .HasConstraintName("FK__ImportNot__Emplo__5FB337D6");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__ImportNot__Emplo__628FA481");
 
                 entity.HasOne(d => d.ShoeStore)
                     .WithMany(p => p.ImportNotes)
                     .HasForeignKey(d => d.ShoeStoreId)
-                    .HasConstraintName("FK__ImportNot__ShoeS__60A75C0F");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__ImportNot__ShoeS__6383C8BA");
             });
 
             modelBuilder.Entity<Promotion>(entity =>
@@ -286,18 +299,18 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Customer)
                     .WithMany(p => p.Reviews)
                     .HasForeignKey(d => d.CustomerId)
-                    .HasConstraintName("FK__Review__Customer__412EB0B6");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Review__Customer__4222D4EF");
 
                 entity.HasOne(d => d.Shoe)
                     .WithMany(p => p.Reviews)
                     .HasForeignKey(d => d.ShoeId)
-                    .HasConstraintName("FK__Review__ShoeId__403A8C7D");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Review__ShoeId__412EB0B6");
             });
 
             modelBuilder.Entity<ReviewFile>(entity =>
             {
-                entity.HasNoKey();
-
                 entity.ToTable("ReviewFile");
 
                 entity.Property(e => e.FileType).HasMaxLength(20);
@@ -305,9 +318,10 @@ namespace DataAccess.Models
                 entity.Property(e => e.Link).HasMaxLength(200);
 
                 entity.HasOne(d => d.Review)
-                    .WithMany()
+                    .WithMany(p => p.ReviewFiles)
                     .HasForeignKey(d => d.ReviewId)
-                    .HasConstraintName("FK__ReviewFil__Revie__440B1D61");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__ReviewFil__Revie__45F365D3");
             });
 
             modelBuilder.Entity<Role>(entity =>
@@ -323,13 +337,14 @@ namespace DataAccess.Models
             {
                 entity.ToTable("Shoe");
 
-                entity.Property(e => e.Description).HasMaxLength(300);
+                entity.Property(e => e.Description).HasMaxLength(500);
 
                 entity.Property(e => e.Gender).HasMaxLength(10);
 
                 entity.HasOne(d => d.Brand)
                     .WithMany(p => p.Shoes)
                     .HasForeignKey(d => d.BrandId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Shoe__BrandId__267ABA7A");
             });
 
@@ -337,14 +352,18 @@ namespace DataAccess.Models
             {
                 entity.ToTable("ShoeColor");
 
+                entity.Property(e => e.Image).HasMaxLength(200);
+
                 entity.HasOne(d => d.Color)
                     .WithMany(p => p.ShoeColors)
                     .HasForeignKey(d => d.ColorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ShoeColor__Color__2E1BDC42");
 
                 entity.HasOne(d => d.Shoe)
                     .WithMany(p => p.ShoeColors)
                     .HasForeignKey(d => d.ShoeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ShoeColor__ShoeI__2D27B809");
             });
 
@@ -359,6 +378,7 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.Shoe)
                     .WithMany(p => p.ShoeFiles)
                     .HasForeignKey(d => d.ShoeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ShoeFile__ShoeId__33D4B598");
             });
 
@@ -369,6 +389,7 @@ namespace DataAccess.Models
                 entity.HasOne(d => d.ShoeColor)
                     .WithMany(p => p.ShoeStores)
                     .HasForeignKey(d => d.ShoeColorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__ShoeStore__ShoeC__30F848ED");
             });
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DataAccess.Models
+namespace DataAccess.Entities
 {
     public partial class ShoeStore
     {
@@ -15,11 +15,11 @@ namespace DataAccess.Models
         }
 
         public int Id { get; set; }
-        public int? ShoeColorId { get; set; }
+        public int ShoeColorId { get; set; }
         public int Size { get; set; }
         public int Quantity { get; set; }
 
-        public virtual ShoeColor? ShoeColor { get; set; }
+        public virtual ShoeColor ShoeColor { get; set; } = null!;
         public virtual ICollection<BillDetail> BillDetails { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }
         public virtual ICollection<Exchange> ExchangeNewShoeStores { get; set; }
