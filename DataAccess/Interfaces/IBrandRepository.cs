@@ -9,7 +9,12 @@ namespace DataAccess.Interfaces
 {
     public interface IBrandRepository:IRepository<Brand>
     {
-        IEnumerable<Brand> GetAllWithJoin();
-        Brand GetByIdWithJoin(int id);
+        IEnumerable<Brand> GetAllBrand();
+        IEnumerable<Brand> GetAllBrandWithShoe();
+
+        Brand GetBrandById(int id);
+        Brand GetBrandByIdWithShoe(int id);
+
+
     }
 }

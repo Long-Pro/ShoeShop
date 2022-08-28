@@ -16,15 +16,25 @@ namespace DataAccess.Repositories
         {
         }
 
-        public IEnumerable<Brand> GetAllWithJoin()
+        public IEnumerable<Brand> GetAllBrand()
         {
-            return _dbSet.Where(x=>x.Id!=0)
-                .Include(x=>x.Shoes)
+            return _dbSet.ToList();
+        }
+        public IEnumerable<Brand> GetAllBrandWithShoe()
+        {
+            return _dbSet
+                .Include(x => x.Shoes)
                 .ToList();
         }
 
+        public Brand GetBrandById(int id)
+        {
+            return _dbSet.Where(x => x.Id == id)
+                .FirstOrDefault();
+        }
 
-        public Brand GetByIdWithJoin(int id)
+
+        public Brand GetBrandByIdWithShoe(int id)
         {
             return _dbSet.Where(x => x.Id == id)
                 .Include(x => x.Shoes)

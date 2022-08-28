@@ -15,9 +15,10 @@ namespace DataAccess.Entities
         public int Id { get; set; }
         public int BrandId { get; set; }
         public string Description { get; set; } = null!;
-        public string Gender { get; set; } = null!;
+        public int GenderType { get; set; }
         public int Price { get; set; }
-        public int Status { get; set; }
+        public bool IsExists { get; set; }
+
 
         public virtual Brand Brand { get; set; } = null!;
         public virtual ICollection<Review> Reviews { get; set; }

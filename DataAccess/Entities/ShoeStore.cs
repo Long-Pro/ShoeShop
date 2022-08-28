@@ -19,6 +19,8 @@ namespace DataAccess.Entities
         public int Size { get; set; }
         public int Quantity { get; set; }
 
+        public bool IsExists { get; set; }
+
         public virtual ShoeColor ShoeColor { get; set; } = null!;
         public virtual ICollection<BillDetail> BillDetails { get; set; }
         public virtual ICollection<Cart> Carts { get; set; }

@@ -10,5 +10,11 @@ namespace Business.Interfaces
     public interface IBrandService
     {
         BrandDTO GetBrandById(int id);
+        BrandDTO GetBrandByIdWithShoe(int id);
+
+        IEnumerable<BrandDTO> GetAllBrand();
+        IEnumerable<BrandDTO> GetAllBrandWithShoe();
+
+
     }
 }

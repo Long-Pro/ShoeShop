@@ -339,7 +339,6 @@ namespace DataAccess.Entities
 
                 entity.Property(e => e.Description).HasMaxLength(500);
 
-                entity.Property(e => e.Gender).HasMaxLength(10);
 
                 entity.HasOne(d => d.Brand)
                     .WithMany(p => p.Shoes)

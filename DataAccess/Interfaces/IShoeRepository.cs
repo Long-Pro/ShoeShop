@@ -9,7 +9,12 @@ namespace DataAccess.Interfaces
 {
     public interface IShoeRepository : IRepository<Shoe>
     {
-        IEnumerable<Shoe> GetAllWithJoin();
-        Shoe GetByIdWithJoin(int id);
+        IEnumerable<Shoe> GetAllShoeWithFile();
+        IEnumerable<Shoe> GetAllShoe();
+
+
+        Shoe GetShoeById(int id);
+        Shoe GetShoeByIdWithFile(int id);
+
     }
 }

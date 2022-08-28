@@ -18,17 +18,27 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
 builder.Services.AddDbContext<ShoeShopContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddSingleton<IDbMapper, DbMapper>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<IShoeService, ShoeService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddSingleton<IDbMapper,DbMapper>();
+builder.Services.AddCors();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddScoped<IBrandService, BrandService>();
 
 
 var app = builder.Build();
+
+app.UseCors(builder =>
+{
+    builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

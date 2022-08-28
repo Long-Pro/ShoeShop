@@ -13,13 +13,39 @@
   box-sizing: border-box;
 }
 html {
-  font-size: 62.5%;
+  //font-size: 62.5%;
+  font-size: 16px;
 }
 body {
   font-family: 'Roboto', 'sans-serif';
-  font-size: 1.6rem;
+  font-size: 1rem;
   // line-height: 1.5;
   text-rendering: optimizeSpeed;
   padding: 0;
   margin: 0;
+}
+
+@media (max-width: 575px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 576px) and (max-width: 991px) {
+}
+// override mui
+.MuiContainer-maxWidthLg {
+  max-width: 1320px !important;
+}
+
+// override bootstrap
+@media (min-width: 1200px) {
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1320px !important;
+  }
 }

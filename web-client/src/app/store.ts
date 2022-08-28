@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 
 import userReducer from '../features/user/userSlice'
 import commentReducer from '../features/comment/commentSlice'
+import shoeReducer from '../features/shoe/shoeSlice'
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     comment: commentReducer,
+    shoe: shoeReducer,
   },
 })
 

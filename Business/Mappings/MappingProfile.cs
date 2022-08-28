@@ -15,11 +15,14 @@ namespace Business.Mappings
         {
             CreateMap<BrandDTO, Brand>()
                 .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name));
-            CreateMap<Brand, BrandDTO>()
-                .ForMember(dest => dest.Name, act => act.MapFrom(src => "111111111")); ;
+            CreateMap<Brand, BrandDTO>();
+                
 
             CreateMap<ShoeDTO, Shoe>();
             CreateMap<Shoe, ShoeDTO>();
+
+            CreateMap<ShoeFileDTO, ShoeFile>();
+            CreateMap<ShoeFile, ShoeFileDTO>();
         }
     }
 }

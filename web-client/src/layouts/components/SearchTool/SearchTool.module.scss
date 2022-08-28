@@ -1,15 +1,13 @@
-.wrapper {
-  padding: 0;
-  background: #fff;
-  height: 60px;
+.toggle-search {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  .logo {
-    img {
-      height: 46px;
-    }
-  }
+}
+.wrapper {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
   .search {
     display: flex;
     align-items: center;
@@ -43,39 +41,50 @@
       }
     }
   }
-  .user {
+  .sort {
     display: flex;
-    color: #666;
-    .user-icon-wrapper {
-      display: flex;
-      align-items: center;
-      margin-left: 40px;
-      span {
-        margin-left: 6px;
-      }
+    align-items: center;
+    min-width: 210px;
+    .title {
+      font-weight: 500;
+      color: #666;
+    }
+    .icons {
+    }
+  }
+  .price-range {
+    display: flex;
+    align-items: center;
+    min-width: 350px;
+    .title {
+      font-weight: 500;
+      color: #666;
+      margin-right: 1rem;
+    }
+    .slider {
+      width: 200px;
+      position: relative;
+      //top: 14px;
     }
   }
 }
 @media (max-width: 575px) {
   .wrapper {
-    padding-left: 6px;
-    padding-right: 6px;
-    padding-bottom: 60px;
-    position: relative;
-    height: auto;
+    padding: 10px 10px;
+    border: 1px solid #ccc;
+    border-radius: 30px;
     .search {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      left: 10px;
+      margin-bottom: 30px;
+      margin-right: 0 !important;
+      width: 100%;
       input {
         width: 100%;
       }
     }
-    .user {
-      .user-icon-wrapper {
-        margin-left: 30px;
-      }
+    .sort {
+      margin-bottom: 20px;
+    }
+    .price-range {
     }
   }
 }
