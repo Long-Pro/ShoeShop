@@ -52,5 +52,13 @@ namespace WebAPI.Controllers
             if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
             return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
         }
+
+        [HttpGet("GetAllShoeWithFileAndBrand")]
+        public IActionResult GetAllShoeWithFileAndBrand()
+        {
+            var x = _shoeService.GetAllShoeWithFileAndBrand();
+            if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
+            return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
+        }
     }
 }

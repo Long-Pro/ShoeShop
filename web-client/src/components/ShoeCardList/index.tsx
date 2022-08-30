@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
-import axios from 'axios'
+import { Container } from '@mui/material'
 
 import styles from './ShoeCardList.module.scss'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { getAllShoe, ShoeState } from '../../features/shoe/shoeSlice'
+import ShoeCardItem from '../ShoeCardItem'
 
 const cx = classNames.bind(styles)
 function ShoeCardList() {
-  let shoeListState = useAppSelector((state) => state.shoe)
+  let shoeList = useAppSelector((state) => state.shoe)
 
-  console.log(shoeListState)
+  console.log(shoeList)
 
   const dispatch = useAppDispatch()
   useEffect(() => {
@@ -18,9 +19,17 @@ function ShoeCardList() {
   }, [])
 
   return (
-    <div className={cx('wrapper')}>
-      <h1>ShoeCardList</h1>
-    </div>
+    <Container maxWidth="lg">
+      <div className={cx('wrapper')}>
+        {shoeList.isLoaded && (
+          <div className={cx('shoe-list')}>
+            {shoeList.value.map((item, index) => (
+              <ShoeCardItem data={item} key={index} />
+            ))}
+          </div>
+        )}
+      </div>
+    </Container>
   )
 }
 

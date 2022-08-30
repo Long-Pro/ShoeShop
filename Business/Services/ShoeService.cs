@@ -45,5 +45,11 @@ namespace Business.Services
             var Shoes = _unitOfWork.Shoe.GetAllShoeWithFile();
             return _dbMapper.mapper.Map<IEnumerable<ShoeDTO>>(Shoes);
         }
+
+        public IEnumerable<ShoeDTO> GetAllShoeWithFileAndBrand()
+        {
+            var Shoes = _unitOfWork.Shoe.GetAllShoeWithFileAndBrand();
+            return _dbMapper.mapper.Map<IEnumerable<ShoeDTO>>(Shoes);
+        }
     }
 }

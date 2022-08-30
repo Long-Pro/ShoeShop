@@ -23,7 +23,16 @@ namespace DataAccess.Repositories
         public IEnumerable<Shoe> GetAllShoeWithFile()
         {
             return _dbSet
-                .Include(x => x.ShoeFiles).ToList();
+                .Include(x => x.ShoeFiles)
+                .ToList();
+        }
+
+        public IEnumerable<Shoe> GetAllShoeWithFileAndBrand()
+        {
+            return _dbSet
+                .Include(x => x.ShoeFiles)
+                .Include(x => x.Brand)
+                .ToList();
         }
 
         public Shoe GetShoeById(int id)

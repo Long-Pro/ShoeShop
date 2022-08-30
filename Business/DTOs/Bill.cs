@@ -17,7 +17,7 @@ namespace DataAccess.DTOs
         public int? PromotionId { get; set; }
         public DateTime OrderTime { get; set; }
         public DateTime? DeliveryTime { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; } = null!;
 
         public virtual CustomerDTO Customer { get; set; } = null!;
         public virtual EmployeeDTO Employee { get; set; } = null!;

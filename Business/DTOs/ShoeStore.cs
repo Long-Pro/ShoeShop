@@ -18,6 +18,7 @@ namespace DataAccess.DTOs
         public int ShoeColorId { get; set; }
         public int Size { get; set; }
         public int Quantity { get; set; }
+        public bool IsExists { get; set; }
 
         public virtual ShoeColorDTO ShoeColor { get; set; } = null!;
         public virtual ICollection<BillDetailDTO> BillDetails { get; set; }

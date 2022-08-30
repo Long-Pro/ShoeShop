@@ -18,7 +18,6 @@ namespace DataAccess.Entities
         public int ShoeColorId { get; set; }
         public int Size { get; set; }
         public int Quantity { get; set; }
-
         public bool IsExists { get; set; }
 
         public virtual ShoeColor ShoeColor { get; set; } = null!;

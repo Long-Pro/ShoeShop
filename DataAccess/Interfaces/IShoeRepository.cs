@@ -10,6 +10,8 @@ namespace DataAccess.Interfaces
     public interface IShoeRepository : IRepository<Shoe>
     {
         IEnumerable<Shoe> GetAllShoeWithFile();
+        IEnumerable<Shoe> GetAllShoeWithFileAndBrand();
+
         IEnumerable<Shoe> GetAllShoe();
 
 

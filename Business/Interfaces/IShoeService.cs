@@ -14,7 +14,6 @@ namespace Business.Interfaces
 
         IEnumerable<ShoeDTO> GetAllShoe();
         IEnumerable<ShoeDTO> GetAllShoeWithFile();
-
-
+        IEnumerable<ShoeDTO> GetAllShoeWithFileAndBrand();
     }
 }
