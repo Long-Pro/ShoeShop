@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Business.Interfaces;
 using DataAccess.DTOs;
+using DataAccess.InputModel;
 using DataAccess.Interfaces;
 
 namespace Business.Services
@@ -49,6 +51,13 @@ namespace Business.Services
         public IEnumerable<ShoeDTO> GetAllShoeWithFileAndBrand()
         {
             var Shoes = _unitOfWork.Shoe.GetAllShoeWithFileAndBrand();
+            return _dbMapper.mapper.Map<IEnumerable<ShoeDTO>>(Shoes);
+        }
+
+        public IEnumerable<ShoeDTO> FilterShoe(ShoeFilter filter, out int totalPage)
+        {
+            int? x = null;
+            var Shoes = _unitOfWork.Shoe.FilterShoe(filter, out totalPage);
             return _dbMapper.mapper.Map<IEnumerable<ShoeDTO>>(Shoes);
         }
     }

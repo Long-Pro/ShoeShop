@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Constants
 {
-    public  enum FileType
+    public static class FileType
     {
-        HINH_ANH,
-        VIDEO
+        public const int PAGE_SIZE = 4;
+
+        public const string IMAGE = "HINH_ANH";
+        public const string VIDEO = "VIDEO";
     }
 }

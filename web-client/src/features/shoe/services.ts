@@ -9,12 +9,17 @@
 // }
 
 import _axios from '../../utils/_axios'
+import { FilterState } from './shoeSlice'
 
-export const getAllShoe = async () => {
-  let link = `/Shoe/GetAllShoeWithFileAndBrand`
+export const getShoeByFilter = async (filter: FilterState) => {
+  const link = `/api/shoes`
+  console.log(filter)
+
   return new Promise((resolve, reject) => {
     _axios
-      .get(link)
+      .get(link, {
+        params: filter,
+      })
       .then((response) => resolve(response))
       .catch((error) => reject(error))
   })

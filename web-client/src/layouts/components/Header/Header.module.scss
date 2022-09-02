@@ -14,18 +14,27 @@
     display: flex;
     align-items: center;
     height: 40px;
+    position: relative;
     input {
       border: 1px solid #ccc;
       border-top-left-radius: 50px;
       border-bottom-left-radius: 50px;
       border-right: none;
       padding-left: 16px;
+      padding-right: 30px;
       height: 100%;
-      width: 260px;
+      width: 280px;
       outline: none;
       &:focus {
         border-color: #ccc;
       }
+    }
+    .search-delete-btn {
+      position: absolute;
+      font-size: 1rem;
+      cursor: pointer;
+      right: 46px;
+      color: #bbb;
     }
     .search-btn {
       height: 100%;
@@ -58,16 +67,17 @@
 }
 @media (max-width: 575px) {
   .wrapper {
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 6px;
     padding-bottom: 60px;
     position: relative;
     height: auto;
     .search {
       position: absolute;
       bottom: 10px;
-      right: 10px;
-      left: 10px;
+      right: 0px;
+      left: 0px;
       input {
         width: 100%;
       }

@@ -1,17 +1,36 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames/bind'
-import { Search, LocalMallOutlined, AccountCircleOutlined } from '@mui/icons-material'
-import Grid from '@mui/material/Unstable_Grid2'
+import { Search, LocalMallOutlined, AccountCircleOutlined, HighlightOff } from '@mui/icons-material'
 import { Container } from '@mui/material'
+
 import images from '../../../assets/images'
 import styles from './Header.module.scss'
+import { getShoeByFilter, updateQ } from '../../../features/shoe/shoeSlice'
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 const cx = classNames.bind(styles)
+
 function Header() {
-  let user = useAppSelector((state) => state.user)
-  //console.log(user)
+  const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.user)
+
+  const [query, setQuery] = useState('')
+
+  const handleChangeSearchInput = (e: any) => {
+    const q = e.target.value
+    setQuery(q)
+  }
+  const handleSearch = () => {
+    dispatch(updateQ(query))
+  }
+  const handleDeleteSearch = () => {
+    setQuery('')
+    dispatch(updateQ(''))
+  }
+  const handleKeyUpSearchInput = (e: any) => {
+    if (e.key === 'Enter') handleSearch()
+  }
   return (
     <Container maxWidth="lg">
       <div className={cx('wrapper')}>
@@ -21,8 +40,14 @@ function Header() {
           </Link>
         </div>
         <div className={cx('search')}>
-          <input placeholder="Tìm kiếm tên giày" />
-          <Search className={cx('search-btn')} />
+          <input
+            placeholder="Tìm kiếm tên giày"
+            value={query}
+            onChange={handleChangeSearchInput}
+            onKeyUp={handleKeyUpSearchInput}
+          />
+          {query && <HighlightOff className={cx('search-delete-btn')} onClick={handleDeleteSearch} />}
+          <Search className={cx('search-btn')} onClick={handleSearch} />
         </div>
 
         <div className={cx('user')}>

@@ -24,16 +24,13 @@ function Banner() {
     <Container maxWidth="lg">
       <Slider {...settings}>
         <div>
-          <img src="https://www.vascara.com/uploads/banner/2022/August/25/14431661418664.png" alt="" />
+          <img src={images.banner1} alt="" />
         </div>
         <div>
-          <img src="https://www.vascara.com/uploads/banner/2022/August/25/14501661426491.jpg" alt="" />
+          <img src={images.banner2} alt="" />
         </div>
         <div>
-          <img src="https://www.vascara.com/uploads/banner/2022/August/25/14431661418664.png" alt="" />
-        </div>
-        <div>
-          <img src="https://www.vascara.com/uploads/banner/2022/August/11/12761660208809.png" alt="" />
+          <img src={images.banner3} alt="" />
         </div>
       </Slider>
     </Container>

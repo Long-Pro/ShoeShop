@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.DTOs;
+using DataAccess.InputModel;
 
 namespace Business.Interfaces
 {
@@ -15,5 +16,6 @@ namespace Business.Interfaces
         IEnumerable<ShoeDTO> GetAllShoe();
         IEnumerable<ShoeDTO> GetAllShoeWithFile();
         IEnumerable<ShoeDTO> GetAllShoeWithFileAndBrand();
+        IEnumerable<ShoeDTO> FilterShoe(ShoeFilter filter, out int totalPage);
     }
 }

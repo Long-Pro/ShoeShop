@@ -4,6 +4,8 @@ import classNames from 'classnames/bind'
 import Header from '../components/Header'
 import SearchTool from '../components/SearchTool'
 import Banner from '../components/Banner'
+import Footer from '../components/Footer'
+
 import { ShoeCardList } from '../../components'
 
 import styles from './MainLayout.module.scss'
@@ -16,8 +18,7 @@ function MainLayout({ children }: Children) {
       <Banner />
       <SearchTool />
       <ShoeCardList />
-
-      <h1>MainLayout</h1>
+      <Footer />
       {children}
     </div>
   )

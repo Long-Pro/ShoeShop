@@ -1,15 +1,17 @@
 ﻿using AutoMapper.QueryableExtensions.Impl;
 using Business.Interfaces;
 using DataAccess.DTOs;
+using DataAccess.InputModel;
 using DataAccess.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+//using System.Web.Http;
 using WebAPI.Models;
 
 
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/shoes")]
     public class ShoeController : ControllerBase
     {
         private readonly IShoeService _shoeService;
@@ -53,12 +55,13 @@ namespace WebAPI.Controllers
             return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
         }
 
-        [HttpGet("GetAllShoeWithFileAndBrand")]
-        public IActionResult GetAllShoeWithFileAndBrand()
+        [HttpGet("")]
+        public IActionResult FilterShoeByName([FromQuery] ShoeFilter filter)
         {
-            var x = _shoeService.GetAllShoeWithFileAndBrand();
+            int totalPage;
+            var x = _shoeService.FilterShoe(filter, out totalPage);
             if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
-            return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
+            return Ok(new ApiResponse("Lấy dữ liệu thành công", x, totalPage));
         }
     }
 }

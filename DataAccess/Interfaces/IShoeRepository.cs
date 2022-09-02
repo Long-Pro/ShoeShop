@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Entities;
+using DataAccess.InputModel;
 
 namespace DataAccess.Interfaces
 {
@@ -12,11 +13,13 @@ namespace DataAccess.Interfaces
         IEnumerable<Shoe> GetAllShoeWithFile();
         IEnumerable<Shoe> GetAllShoeWithFileAndBrand();
 
+        IEnumerable<Shoe> FilterShoe(ShoeFilter filter, out int totalPage);
+
+
         IEnumerable<Shoe> GetAllShoe();
 
 
         Shoe GetShoeById(int id);
         Shoe GetShoeByIdWithFile(int id);
-
     }
 }

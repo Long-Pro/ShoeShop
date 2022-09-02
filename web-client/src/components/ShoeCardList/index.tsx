@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'react'
 import classNames from 'classnames/bind'
-import { Container } from '@mui/material'
+import { Container, Pagination, Stack } from '@mui/material'
 
 import styles from './ShoeCardList.module.scss'
-import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { getAllShoe, ShoeState } from '../../features/shoe/shoeSlice'
 import ShoeCardItem from '../ShoeCardItem'
+import { useAppSelector, useAppDispatch } from '../../app/hooks'
+import { getShoeByFilter, updatePage } from '../../features/shoe/shoeSlice'
 
 const cx = classNames.bind(styles)
 function ShoeCardList() {
-  let shoeList = useAppSelector((state) => state.shoe)
-
-  console.log(shoeList)
-
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(getAllShoe())
-  }, [])
+  const shoeList = useAppSelector((state) => state.shoe)
+  const filter = useAppSelector((state) => state.shoe.filter)
+  const [page, setPage] = useState(1)
 
+  useEffect(() => {
+    dispatch(getShoeByFilter(filter))
+
+    if (filter.page == 1 && page != 1) setPage(1)
+  }, [filter])
+
+  const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value)
+    dispatch(updatePage(value))
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
   return (
     <Container maxWidth="lg">
       <div className={cx('wrapper')}>
@@ -28,6 +35,9 @@ function ShoeCardList() {
             ))}
           </div>
         )}
+        <div className="d-flex justify-content-center mt-3">
+          <Pagination count={shoeList.totalPage} color="primary" page={page} onChange={handleChangePage} />
+        </div>
       </div>
     </Container>
   )

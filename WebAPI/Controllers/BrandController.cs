@@ -9,7 +9,7 @@ using WebAPI.Models;
 namespace WebAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/brands")]
     public class BrandController : ControllerBase
     {
         private readonly IBrandService _brandService;
@@ -35,7 +35,7 @@ namespace WebAPI.Controllers
             return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
         }
 
-        [HttpGet("GetAllBrand")]
+        [HttpGet("")]
         public IActionResult GetAllBrand()
         {
             var x = _brandService.GetAllBrand();
