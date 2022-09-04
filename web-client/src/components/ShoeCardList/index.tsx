@@ -5,17 +5,17 @@ import { Container, Pagination, Stack } from '@mui/material'
 import styles from './ShoeCardList.module.scss'
 import ShoeCardItem from '../ShoeCardItem'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { getShoeByFilter, updatePage } from '../../features/shoe/shoeSlice'
+import { getShoesByFilter, updatePage } from '../../features/shoes/shoesSlice'
 
 const cx = classNames.bind(styles)
 function ShoeCardList() {
   const dispatch = useAppDispatch()
-  const shoeList = useAppSelector((state) => state.shoe)
-  const filter = useAppSelector((state) => state.shoe.filter)
+  const shoeList = useAppSelector((state) => state.shoes)
+  const filter = useAppSelector((state) => state.shoes.filter)
   const [page, setPage] = useState(1)
 
   useEffect(() => {
-    dispatch(getShoeByFilter(filter))
+    dispatch(getShoesByFilter(filter))
 
     if (filter.page == 1 && page != 1) setPage(1)
   }, [filter])

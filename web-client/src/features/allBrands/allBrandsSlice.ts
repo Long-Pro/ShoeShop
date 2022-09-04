@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-import * as service from './services'
+import * as service from './service'
 import { Brand } from '../../Interfaces'
 
-export const getAllBrand = createAsyncThunk('brand/getAllBrand', async () => {
-  const response = await service.getAllBrand()
+export const getAllBrands = createAsyncThunk('brand/getAllBrands', async () => {
+  const response = await service.getAllBrands()
   return response
 })
 
@@ -20,22 +20,22 @@ const initialState: ShoeState = {
   isLoaded: false,
   message: '',
 }
-export const brandSlice = createSlice({
+export const allBrandsSlice = createSlice({
   name: 'brand',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllBrand.fulfilled, (state, action: any) => {
+    builder.addCase(getAllBrands.fulfilled, (state, action: any) => {
       state.isLoaded = true
       state.value = action.payload.data
       state.message = action.payload.message
     })
-    builder.addCase(getAllBrand.rejected, (state, action) => {
+    builder.addCase(getAllBrands.rejected, (state, action) => {
       state.isLoaded = false
       state.message = action.error.message as string
     })
   },
 })
-export const {} = brandSlice.actions
+export const {} = allBrandsSlice.actions
 
-export default brandSlice.reducer
+export default allBrandsSlice.reducer

@@ -13,6 +13,8 @@ namespace DataAccess.DTOs
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Image { get; set; } = null!;
+        public bool IsExists { get; set; }
+
 
         public virtual ICollection<ShoeDTO> Shoes { get; set; }
     }

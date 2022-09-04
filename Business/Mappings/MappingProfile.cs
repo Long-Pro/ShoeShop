@@ -13,16 +13,32 @@ namespace Business.Mappings
     {
         public MappingProfile()
         {
-            CreateMap<BrandDTO, Brand>()
-                .ForMember(dest => dest.Name, act => act.MapFrom(src => src.Name));
+            CreateMap<BrandDTO, Brand>();
             CreateMap<Brand, BrandDTO>();
-                
 
             CreateMap<ShoeDTO, Shoe>();
             CreateMap<Shoe, ShoeDTO>();
 
             CreateMap<ShoeFileDTO, ShoeFile>();
             CreateMap<ShoeFile, ShoeFileDTO>();
+
+            CreateMap<ShoeColorDTO, ShoeColor>();
+            CreateMap<ShoeColor, ShoeColorDTO>();
+
+            CreateMap<ShoeStoreDTO, ShoeStore>();
+            CreateMap<ShoeStore, ShoeStoreDTO>();
+
+            CreateMap<ReviewDTO, Review>();
+            CreateMap<Review, ReviewDTO>();
+
+            CreateMap<ReviewFileDTO, ReviewFile>();
+            CreateMap<ReviewFile, ReviewFileDTO>();
+
+            CreateMap<CustomerDTO, Customer>();
+            CreateMap<Customer, CustomerDTO>();
+
+            CreateMap<AccountDTO, Account>();
+            CreateMap<Account, AccountDTO>();
         }
     }
 }

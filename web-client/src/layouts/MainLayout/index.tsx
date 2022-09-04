@@ -15,11 +15,8 @@ function MainLayout({ children }: Children) {
   return (
     <div className={cx('wrapper')}>
       <Header />
-      <Banner />
-      <SearchTool />
-      <ShoeCardList />
-      <Footer />
       {children}
+      <Footer />
     </div>
   )
 }

@@ -60,5 +60,12 @@ namespace Business.Services
             var Shoes = _unitOfWork.Shoe.FilterShoe(filter, out totalPage);
             return _dbMapper.mapper.Map<IEnumerable<ShoeDTO>>(Shoes);
         }
+
+
+        public IEnumerable<ReviewDTO> GetReviewsByShoeId(int id, int page, out int totalPage)
+        {
+            var x = _unitOfWork.Review.GetReviewsByShoeId(id, page, out totalPage);
+            return _dbMapper.mapper.Map<IEnumerable<ReviewDTO>>(x);
+        }
     }
 }

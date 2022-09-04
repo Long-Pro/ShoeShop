@@ -1,16 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import userReducer from '../features/user/userSlice'
-import commentReducer from '../features/comment/commentSlice'
+import reviewsSlice from '../features/reviews/reviewsSlice'
+import shoesReducer from '../features/shoes/shoesSlice'
 import shoeReducer from '../features/shoe/shoeSlice'
-import brandReducer from '../features/brand/brandSlice'
+import allBrandsReducer from '../features/allBrands/allBrandsSlice'
+import customerSlice from '../features/customer/customerSlice'
+import { DashboardCustomizeRounded } from '@mui/icons-material'
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
-    comment: commentReducer,
+    reviews: reviewsSlice,
+    shoes: shoesReducer,
     shoe: shoeReducer,
-    brand: brandReducer,
+    allBrands: allBrandsReducer,
+    customer: customerSlice,
   },
 })
 

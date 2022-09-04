@@ -15,13 +15,16 @@ namespace WebAPI.Controllers
     public class ShoeController : ControllerBase
     {
         private readonly IShoeService _shoeService;
+        private readonly IReviewService _reviewService;
 
-        public ShoeController(IUnitOfWork unitOfWork, IShoeService shoeService)
+
+        public ShoeController(IUnitOfWork unitOfWork, IShoeService shoeService, IReviewService reviewService)
         {
             _shoeService = shoeService;
+            _reviewService = reviewService;
         }
 
-        [HttpGet("GetShoeById")]
+        [HttpGet("{id}")]
         public IActionResult GetShoeById(int id)
         {
             var x = _shoeService.GetShoeById(id);
@@ -31,29 +34,15 @@ namespace WebAPI.Controllers
             return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
         }
 
-        [HttpGet("GetShoeByIdWithFile")]
-        public IActionResult GetShoeByIdWithFile(int id)
+        [HttpGet("{id}/reviews")]
+        public IActionResult GetReviewsByShoeId(int id, int page)
         {
-            var x = _shoeService.GetShoeByIdWithFile(id);
+            int totalPage;
+            var x = _reviewService.GetReviewsByShoeId(id, page, out totalPage);
             if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
-            return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
+            return Ok(new ApiResponse("Lấy dữ liệu thành công", x, totalPage));
         }
 
-        [HttpGet("GetAllShoe")]
-        public IActionResult GetAllShoe()
-        {
-            var x = _shoeService.GetAllShoe();
-            if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
-            return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
-        }
-
-        [HttpGet("GetAllShoeWithFile")]
-        public IActionResult GetAllShoeWithFile()
-        {
-            var x = _shoeService.GetAllShoeWithFile();
-            if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
-            return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
-        }
 
         [HttpGet("")]
         public IActionResult FilterShoeByName([FromQuery] ShoeFilter filter)

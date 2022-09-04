@@ -8,14 +8,10 @@ namespace DataAccess.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        IBrandRepository Brand
-        {
-            get;
-        }
-        IShoeRepository Shoe
-        {
-            get;
-        }
+        IBrandRepository Brand { get; }
+        IShoeRepository Shoe { get; }
+        IReviewRepository Review { get; }
+
         int Save();
     }
 }

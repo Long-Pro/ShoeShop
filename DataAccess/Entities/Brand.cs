@@ -13,6 +13,8 @@ namespace DataAccess.Entities
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string Image { get; set; } = null!;
+        public bool IsExists { get; set; }
+
 
         public virtual ICollection<Shoe> Shoes { get; set; }
     }

@@ -1,6 +1,6 @@
 import _axios from '../../utils/_axios'
 
-export const getAllBrand = async () => {
+export const getAllBrands = async () => {
   const link = `/api/brands`
   return new Promise((resolve, reject) => {
     _axios

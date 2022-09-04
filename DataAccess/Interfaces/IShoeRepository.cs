@@ -13,6 +13,7 @@ namespace DataAccess.Interfaces
         IEnumerable<Shoe> GetAllShoeWithFile();
         IEnumerable<Shoe> GetAllShoeWithFileAndBrand();
 
+
         IEnumerable<Shoe> FilterShoe(ShoeFilter filter, out int totalPage);
 
 

@@ -1,6 +1,7 @@
 import _axios from '../../utils/_axios'
-export const getShoeById = async (id: number) => {
-  const link = `/api/shoes/${id}`
+
+export const getCustomer = async () => {
+  const link = `https://localhost:7138/api/shoes/${123}/reviews`
   return new Promise((resolve, reject) => {
     _axios
       .get(link)

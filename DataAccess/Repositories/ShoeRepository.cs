@@ -31,8 +31,8 @@ namespace DataAccess.Repositories
 
 
             return sql
-                .Include(x => x.ShoeFiles)
                 .Include(x => x.Brand)
+                .Include(x => x.ShoeFiles.OrderBy(x => x.FileOrder).Take(2))
                 .OrderBy(x => filter.sort == SortBy.PRICE_ASC ? x.Price : 0)
                 .ThenByDescending(x => filter.sort == SortBy.PRICE_DESC ? x.Price : 0)
                 .ThenBy(x => filter.sort == SortBy.NAME_ASC ? x.Name : null)
@@ -65,7 +65,12 @@ namespace DataAccess.Repositories
 
         public Shoe GetShoeById(int id)
         {
-            return _dbSet.Where(x => x.Id == id).FirstOrDefault();
+            return _dbSet.Where(x => x.Id == id)
+                .Include(x => x.ShoeColors)
+                .ThenInclude(x => x.ShoeStores)
+                .Include(x => x.Brand)
+                .Include(x => x.ShoeFiles.OrderBy(x => x.FileOrder))
+                .FirstOrDefault();
         }
 
 

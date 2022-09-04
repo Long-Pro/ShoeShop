@@ -28,8 +28,8 @@ import { blue } from '@mui/material/colors'
 
 import images from '../../../assets/images'
 import styles from './SearchTool.module.scss'
-import { getAllBrand } from '../../../features/brand/brandSlice'
-import { updateSortBy, updateBrandId, updatePriceRange, updatePage } from '../../../features/shoe/shoeSlice'
+import { getAllBrands } from '../../../features/allBrands/allBrandsSlice'
+import { updateSortBy, updateBrandId, updatePriceRange, updatePage } from '../../../features/shoes/shoesSlice'
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 
 export interface AutocompleteType {
@@ -41,7 +41,7 @@ let widthWindow = 0
 
 function SearchTool() {
   const dispatch = useAppDispatch()
-  const brandState = useAppSelector((state) => state.brand)
+  const brandState = useAppSelector((state) => state.allBrands)
 
   const [sortBy, setSortBy] = useState<string>()
   const [priceRange, setPriceRange] = useState<number[]>()
@@ -89,7 +89,7 @@ function SearchTool() {
   }, [])
 
   useEffect(() => {
-    if (!brandState.isLoaded) dispatch(getAllBrand())
+    if (!brandState.isLoaded) dispatch(getAllBrands())
   }, [])
   useEffect(() => {
     if (brandState.isLoaded) {

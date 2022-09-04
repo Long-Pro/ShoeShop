@@ -22,6 +22,8 @@ builder.Services.AddSingleton<IDbMapper, DbMapper>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<IShoeService, ShoeService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

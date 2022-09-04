@@ -6,14 +6,14 @@ import { Container } from '@mui/material'
 
 import images from '../../../assets/images'
 import styles from './Header.module.scss'
-import { getShoeByFilter, updateQ } from '../../../features/shoe/shoeSlice'
+import { getShoesByFilter, updateQ } from '../../../features/shoes/shoesSlice'
 
 import { useAppSelector, useAppDispatch } from '../../../app/hooks'
 const cx = classNames.bind(styles)
 
 function Header() {
   const dispatch = useAppDispatch()
-  const user = useAppSelector((state) => state.user)
+  const user: any = useAppSelector((state) => state.customer)
 
   const [query, setQuery] = useState('')
 

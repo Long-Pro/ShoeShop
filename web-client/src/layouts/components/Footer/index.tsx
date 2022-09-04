@@ -12,7 +12,15 @@ function Footer() {
   return (
     <Container maxWidth="lg" className={cx('wrapper')}>
       <Grid container spacing={2}>
-        <Grid xs={12} sm={6}>
+        <Grid xs={6} sm={3}>
+          <h4>Về ShoeShop</h4>
+          <ul>
+            <li>Câu chuyện</li>
+            <li>Bước tiến phát triển</li>
+            <li>Hoạt động</li>
+          </ul>
+        </Grid>
+        <Grid xs={6} sm={3}>
           <h4>Trợ giúp</h4>
           <ul>
             <li>Tuyển dụng</li>

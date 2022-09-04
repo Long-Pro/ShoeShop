@@ -1,0 +1,28 @@
+.wrapper {
+  margin-top: 32px;
+  .reviews {
+    .review {
+      margin-bottom: 20px;
+      --dimension: 40px;
+      .avatar {
+        height: var(--dimension);
+        width: var(--dimension);
+        margin-right: 10px;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+      .comment {
+        margin-left: calc(var(--dimension) + 10px);
+      }
+      .images {
+        margin-left: calc(var(--dimension) + 10px);
+        img {
+          width: 40px;
+          height: 40px;
+          margin-right: 10px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

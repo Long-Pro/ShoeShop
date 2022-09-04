@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import classNames from 'classnames/bind'
+import { Link } from 'react-router-dom'
 
 import styles from './ShoeCardItem.module.scss'
 import { Shoe } from '../../Interfaces'
@@ -22,7 +23,9 @@ function ShoeCardItem(prop: Prop) {
         </div>
         <img className={cx('brand-image')} src={data.brand?.image} alt="" />
       </div>
-      <p className={cx('name')}>{data.name}</p>
+      <Link to={`/shoes/${data.id}`} className={cx('name')}>
+        {data.name}
+      </Link>
     </div>
   )
 }

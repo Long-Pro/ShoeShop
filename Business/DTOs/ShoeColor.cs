@@ -15,6 +15,7 @@ namespace DataAccess.DTOs
         public string Color { get; set; } = null!;
         public string? Hex { get; set; }
         public string Image { get; set; } = null!;
+        public bool IsExists { get; set; }
 
         public virtual ShoeDTO Shoe { get; set; } = null!;
         public virtual ICollection<ShoeStoreDTO> ShoeStores { get; set; }
