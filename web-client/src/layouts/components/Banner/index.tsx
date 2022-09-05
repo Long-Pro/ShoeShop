@@ -21,7 +21,7 @@ function Banner() {
     arrows: false,
   }
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" className={cx('wrapper')}>
       <Slider {...settings}>
         <div>
           <img src={images.banner1} alt="" />
