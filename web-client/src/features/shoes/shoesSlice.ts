@@ -58,9 +58,9 @@ export const shoesSlice = createSlice({
       console.log(action.payload)
 
       state.isLoaded = true
-      state.value = action.payload.data
+      state.value = action.payload.data.value
       state.message = action.payload.message
-      state.totalPage = action.payload.totalPage
+      state.totalPage = action.payload.data.totalPage
     })
     builder.addCase(getShoesByFilter.rejected, (state, action) => {
       //console.log(action)

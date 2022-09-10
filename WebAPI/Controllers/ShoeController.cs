@@ -3,8 +3,8 @@ using Business.Interfaces;
 using DataAccess.DTOs;
 using DataAccess.InputModel;
 using DataAccess.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-//using System.Web.Http;
 using WebAPI.Models;
 
 
@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
             _reviewService = reviewService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize]
         public IActionResult GetShoeById(int id)
         {
             var x = _shoeService.GetShoeById(id);
@@ -34,13 +34,19 @@ namespace WebAPI.Controllers
             return Ok(new ApiResponse("Lấy dữ liệu thành công", x));
         }
 
+        [HttpGet("test"), Authorize]
+        public IActionResult Test()
+        {
+            return Ok(new ApiResponse("Lấy dữ liệu thành công", "1234"));
+        }
+
         [HttpGet("{id}/reviews")]
         public IActionResult GetReviewsByShoeId(int id, int page)
         {
             int totalPage;
             var x = _reviewService.GetReviewsByShoeId(id, page, out totalPage);
             if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
-            return Ok(new ApiResponse("Lấy dữ liệu thành công", x, totalPage));
+            return Ok(new ApiResponse("Lấy dữ liệu thành công", new { totalPage = totalPage, value = x }));
         }
 
 
@@ -50,7 +56,7 @@ namespace WebAPI.Controllers
             int totalPage;
             var x = _shoeService.FilterShoe(filter, out totalPage);
             if (x == null) return NotFound(new ApiResponse("Không tìm thấy dữ liệu"));
-            return Ok(new ApiResponse("Lấy dữ liệu thành công", x, totalPage));
+            return Ok(new ApiResponse("Lấy dữ liệu thành công", new { totalPage = totalPage, value = x }));
         }
     }
 }

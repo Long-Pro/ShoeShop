@@ -2,7 +2,9 @@
   width: 250px;
   margin: 10px;
   transition: all 0.8s ease;
-
+  img {
+    width: 100%;
+  }
   &:hover {
     transform: scale(1.05);
     .shoe-image_hover {

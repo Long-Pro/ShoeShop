@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
     {
         private readonly IBrandService _brandService;
 
-        public BrandController(IUnitOfWork unitOfWork,IBrandService brandService)
+        public BrandController(IBrandService brandService)
         {
             _brandService = brandService;
         }

@@ -4,14 +4,11 @@
     {
         public string Message;
         public object Data;
-        public int? TotalPage;
 
-
-        public ApiResponse(string message, object data = null, int? totalPage = null)
+        public ApiResponse(string message, object data = null)
         {
             Message = message;
             Data = data;
-            TotalPage = totalPage;
         }
     }
 }

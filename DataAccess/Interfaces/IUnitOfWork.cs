@@ -11,6 +11,8 @@ namespace DataAccess.Interfaces
         IBrandRepository Brand { get; }
         IShoeRepository Shoe { get; }
         IReviewRepository Review { get; }
+        ICustomerRepository Customer { get; }
+
 
         int Save();
     }

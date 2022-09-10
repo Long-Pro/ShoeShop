@@ -31,9 +31,9 @@ export const reviewsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getReviewsByShoeId.fulfilled, (state, action: any) => {
       state.isLoaded = true
-      state.value = action.payload.data
+      state.value = action.payload.data.value
       state.message = action.payload.message
-      state.totalPage = action.payload.totalPage
+      state.totalPage = action.payload.data.totalPage
     })
     builder.addCase(getReviewsByShoeId.rejected, (state, action) => {
       state.isLoaded = false

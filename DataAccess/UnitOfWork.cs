@@ -18,11 +18,13 @@ namespace DataAccess
             Brand = new BrandRepository(this._context);
             Shoe = new ShoeRepository(this._context);
             Review = new ReviewRepository(this._context);
+            Customer = new CustomerRepository(this._context);
         }
         public IBrandRepository Brand { get; private set; }
             
         public IShoeRepository Shoe { get; private set; }
         public IReviewRepository Review { get; private set; }
+        public ICustomerRepository Customer { get; private set; }
 
 
         public void Dispose()
