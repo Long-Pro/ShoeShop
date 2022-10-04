@@ -7,7 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2'
 
 import images from '../../assets/images'
 import styles from './Login.module.scss'
-import { getShoesByFilter, updateQ } from '../../features/shoes/shoesSlice'
+import { login } from '../../features/customer/customerSlice'
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 const cx = classNames.bind(styles)
@@ -27,6 +27,7 @@ function Header() {
   const handleSubmit = () => {
     console.log(account)
     console.log(password)
+    dispatch(login({ account, password }))
   }
 
   return (

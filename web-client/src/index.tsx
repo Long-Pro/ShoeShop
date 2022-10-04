@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
+import { PersistGate } from 'redux-persist/integration/react'
 
-import { GlobalStyles } from './components'
-import { store } from './app/store'
+import { store, persistor } from './app/store'
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   // <React.StrictMode>
@@ -16,9 +16,9 @@ root.render(
   //   </Provider>
   // </React.StrictMode>,
   <Provider store={store}>
-    <GlobalStyles>
+    <PersistGate loading={null} persistor={persistor}>
       <App />
-    </GlobalStyles>
+    </PersistGate>
   </Provider>,
 )
 

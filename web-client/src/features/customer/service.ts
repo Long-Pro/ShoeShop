@@ -1,10 +1,11 @@
 import _axios from '../../utils/_axios'
+import { LoginModel } from './customerSlice'
 
-export const getCustomer = async () => {
-  const link = `https://localhost:7138/api/shoes/${123}/reviews`
+export const login = async (login: LoginModel) => {
+  const link = `/api/customers/login`
   return new Promise((resolve, reject) => {
     _axios
-      .get(link)
+      .post(link, login)
       .then((response) => resolve(response))
       .catch((error) => reject(error))
   })

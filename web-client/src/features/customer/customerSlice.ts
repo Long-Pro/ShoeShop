@@ -4,8 +4,14 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 import * as service from './service'
 import { Customer } from '../../Interfaces'
 
-export const getCustomer = createAsyncThunk('review/getCustomerByShoeId', async () => {
-  const response = await service.getCustomer()
+export interface LoginModel {
+  account: string
+  password: string
+}
+
+export const login = createAsyncThunk('review/getCustomerByShoeId', async (login: LoginModel) => {
+  const response = await service.login(login)
+  console.log(response)
   return response
 })
 
@@ -20,16 +26,16 @@ const initialState: CustomerState = {
   message: '',
 }
 export const customerSlice = createSlice({
-  name: 'review',
+  name: 'customer',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCustomer.fulfilled, (state, action: any) => {
+    builder.addCase(login.fulfilled, (state, action: any) => {
       state.isLoaded = true
       state.value = action.payload.data
       state.message = action.payload.message
     })
-    builder.addCase(getCustomer.rejected, (state, action) => {
+    builder.addCase(login.rejected, (state, action) => {
       state.isLoaded = false
       state.message = action.error.message as string
     })
