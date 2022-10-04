@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.InputModel
 {
-    public class ShoeFilter
+    public class ShoeFilterModel
     {
         public string? q { get; set; }
         public string? sort { get; set; }
@@ -15,7 +15,7 @@ namespace DataAccess.InputModel
         public int? brandId { get; set; }
         public int page { get; set; }
 
-        public ShoeFilter()
+        public ShoeFilterModel()
         {
             page = 1;
         }

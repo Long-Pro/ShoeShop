@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
             _reviewService = reviewService;
         }
 
-        [HttpGet("{id}"), Authorize]
+        [HttpGet("{id}")]
         public IActionResult GetShoeById(int id)
         {
             var x = _shoeService.GetShoeById(id);
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("")]
-        public IActionResult FilterShoeByName([FromQuery] ShoeFilter filter)
+        public IActionResult FilterShoeByName([FromQuery] ShoeFilterModel filter)
         {
             int totalPage;
             var x = _shoeService.FilterShoe(filter, out totalPage);

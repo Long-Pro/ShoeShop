@@ -18,7 +18,7 @@ namespace DataAccess.Repositories
         {
         }
 
-        public IEnumerable<Shoe> FilterShoe(ShoeFilter filter, out int totalPage)
+        public IEnumerable<Shoe> FilterShoe(ShoeFilterModel filter, out int totalPage)
         {
             const int PAGE_SIZE = 12;
             var sql = _dbSet

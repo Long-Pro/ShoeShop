@@ -11,13 +11,13 @@ using DataAccess.Interfaces;
 
 namespace Business.Services
 {
-    public class ShoeService: IShoeService
+    public class ShoeService : IShoeService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDbMapper _dbMapper;
 
 
-        public ShoeService(IUnitOfWork unitOfWork,IDbMapper dbMapper)
+        public ShoeService(IUnitOfWork unitOfWork, IDbMapper dbMapper)
         {
             _unitOfWork = unitOfWork;
             _dbMapper = dbMapper;
@@ -36,12 +36,12 @@ namespace Business.Services
         }
 
 
-
         public IEnumerable<ShoeDTO> GetAllShoe()
         {
             var Shoes = _unitOfWork.Shoe.GetAllShoe();
             return _dbMapper.mapper.Map<IEnumerable<ShoeDTO>>(Shoes);
         }
+
         public IEnumerable<ShoeDTO> GetAllShoeWithFile()
         {
             var Shoes = _unitOfWork.Shoe.GetAllShoeWithFile();
@@ -54,7 +54,7 @@ namespace Business.Services
             return _dbMapper.mapper.Map<IEnumerable<ShoeDTO>>(Shoes);
         }
 
-        public IEnumerable<ShoeDTO> FilterShoe(ShoeFilter filter, out int totalPage)
+        public IEnumerable<ShoeDTO> FilterShoe(ShoeFilterModel filter, out int totalPage)
         {
             int? x = null;
             var Shoes = _unitOfWork.Shoe.FilterShoe(filter, out totalPage);

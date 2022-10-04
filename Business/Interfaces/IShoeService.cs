@@ -16,7 +16,7 @@ namespace Business.Interfaces
         IEnumerable<ShoeDTO> GetAllShoe();
         IEnumerable<ShoeDTO> GetAllShoeWithFile();
         IEnumerable<ShoeDTO> GetAllShoeWithFileAndBrand();
-        IEnumerable<ShoeDTO> FilterShoe(ShoeFilter filter, out int totalPage);
+        IEnumerable<ShoeDTO> FilterShoe(ShoeFilterModel filter, out int totalPage);
 
         IEnumerable<ReviewDTO> GetReviewsByShoeId(int id, int page, out int totalPage);
     }
